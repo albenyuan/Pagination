@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagination</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<ul class="pagination">
+
+
+</ul>
+
+
+<script src="./dist/jquery/jquery.js"></script>
+<script src="./src/pagination.js"></script>
+<script>
+    $(function () {
+        $.paginationDefault({
+            header: {
+                firstText: '首页',
+                lastText: '尾页'
+            },
+            pageBtn: 10,
+            neighbor: {
+                previewText: '前一页',
+                nextText: '后一页'
+            },
+            firstPage: 0
+        });
+    });
+</script>
+</body>
+</html>
