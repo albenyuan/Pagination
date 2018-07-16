@@ -39,7 +39,6 @@ if (typeof jQuery === 'undefined') {
         size: 20, // 每一页的数量
         total: 0, // 总数记录数
         click(data, el) {
-            console.log(data, el);
         }
     };
 
@@ -52,7 +51,6 @@ if (typeof jQuery === 'undefined') {
      */
     function initHtml(pagination) {
         let buttons = getButtons(pagination);
-        console.log(buttons);
         let html = '';
         buttons.forEach(function (button) {
             html += '<li class="page ${disabled} ${active}" data-page="${page}"><a class=""  type="button" href="javascript:void(0);">${text}</a></li>'
@@ -65,7 +63,6 @@ if (typeof jQuery === 'undefined') {
     }
 
     function getButtons(pagination) {
-        console.log(pagination);
         let buttons = [];
         let option = pagination.options;
         let pageButtonCount = option.pageBtn;
@@ -96,9 +93,7 @@ if (typeof jQuery === 'undefined') {
                 page: previewPage
             }));
         }
-        // let count = pagination.getRealCount();
         let middle = Math.round(pageButtonCount / 2);
-        console.log(middle);
         let btnFirstPage = option.selectedIndex - middle + 1;
         if (btnFirstPage < option.firstPage) {
             btnFirstPage = option.firstPage;
@@ -136,16 +131,20 @@ if (typeof jQuery === 'undefined') {
     function bindClick(pagination) {
         pagination.$element.find('li a').unbind('click').click(function () {
             $(this).addClass('disabled');
-            let data = $(this).closest('li').data();
-            pagination.options.click(data, $(this));
-            pagination.options.selectedIndex = data.page;
-            pagination.html();
+            let $item = $(this).closest('li');
+            let data = $item.data();
+            if (!$item.hasClass('disabled')) {
+                pagination.options.click(data, $(this));
+                if (data.page != pagination.options.selectedIndex) {
+                    pagination.options.selectedIndex = data.page;
+                    pagination.html();
+                }
+            }
         });
     }
 
     Pagination.prototype.html = function (html) {
         html = html || initHtml(this);
-        console.log(this.$element);
         this.$element.html(html);
         bindClick(this);
     };
@@ -216,7 +215,6 @@ if (typeof jQuery === 'undefined') {
 
     $.paginationDefault = function (config) {
         SYSTEM_CONFIG = $.extend(SYSTEM_CONFIG, config);
-        console.log(SYSTEM_CONFIG);
     };
 
 
