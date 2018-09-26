@@ -13,20 +13,18 @@
 <script src="./dist/jquery/jquery.js"></script>
 <script src="./src/pagination.js"></script>
 <script>
-    $(function () {
-        $.paginationDefault({
-            header: {
-                firstText: '首页',
-                lastText: '尾页'
-            },
-            pageBtn: 10,
-            neighbor: {
-                previewText: '前一页',
-                nextText: '后一页'
-            },
-            firstPage: 0
-        });
+  $(function () {
+    $.paginationDefault({
+      header: null,
+      pageBtn: 10,
+      neighbor: {
+        previewText: '上一页',
+        nextText: '下一页'
+      },
+      firstPage: 0,
+      selectedIndex: 0
     });
+  });
 </script>
 </body>
 </html>
